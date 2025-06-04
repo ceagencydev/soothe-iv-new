@@ -31,6 +31,9 @@ interface ModernContactFormProps {
   className?: string
 }
 
+// Make.com webhook URL
+const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/quyob9vflq22o6vvq6bfqnvcq6ykmhxh"
+
 export default function ModernContactForm({
   title = "Get In Touch",
   description = "Fill out the form below and we'll get back to you as soon as possible.",
@@ -56,12 +59,20 @@ export default function ModernContactForm({
     setErrorMessage("")
 
     try {
-      const response = await fetch("/api/ghl-lead", {
+      // Add source information to help with tracking
+      const formData = {
+        ...data,
+        source: "Website Contact Form",
+        submittedAt: new Date().toISOString(),
+      }
+
+      // Send data directly to Make.com webhook
+      const response = await fetch(MAKE_WEBHOOK_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       })
 
       if (!response.ok) {
