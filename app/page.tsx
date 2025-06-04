@@ -5,7 +5,7 @@ import { CallbackButton } from "@/components/callback-button"
 
 export default function IVTherapyLanding() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Sticky CTA for Mobile */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-orange-500 p-4 md:hidden">
         <CallbackButton className="w-full bg-white text-orange-500 hover:bg-gray-100 font-bold text-xl py-6">
@@ -57,7 +57,7 @@ export default function IVTherapyLanding() {
                   <p className="text-sm text-gray-600 mb-4">
                     Same medical-grade care you'd get in a hospital — for half the price, in your living room.
                   </p>
-                  <CallbackButton className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl py-6 px-8">
+                  <CallbackButton className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg md:text-xl py-6 px-4 md:px-8">
                     CLAIM YOUR 50% OFF DRIP →
                   </CallbackButton>
                   <p className="text-xs text-gray-500 mt-2">100% Satisfaction Guarantee — or your money back</p>
@@ -169,7 +169,7 @@ export default function IVTherapyLanding() {
               </div>
             </div>
             <div className="text-center mt-8">
-              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-10 py-6">
+              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg md:text-xl px-6 md:px-10 py-6">
                 SCHEDULE YOUR 50% OFF DRIP →
               </CallbackButton>
             </div>
@@ -206,7 +206,7 @@ export default function IVTherapyLanding() {
               This isn't a spa service — this is medical therapy, delivered professionally and discreetly.
             </p>
             <div className="text-center mt-8">
-              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-10 py-6">
+              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg md:text-xl px-6 md:px-10 py-6">
                 CLAIM YOUR 50% OFF DRIP →
               </CallbackButton>
             </div>
@@ -250,7 +250,7 @@ export default function IVTherapyLanding() {
               </p>
             </div>
 
-            <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-10 py-6 mb-4">
+            <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg md:text-xl px-6 md:px-10 py-6 mb-4">
               CLAIM YOUR 50% OFF DRIP →
             </CallbackButton>
 
@@ -551,8 +551,8 @@ export default function IVTherapyLanding() {
             <p className="text-lg mb-8 font-semibold">
               Only a few spots remain this week. Book now to secure your 50% off session.
             </p>
-            <CallbackButton className="bg-white text-orange-500 hover:bg-gray-100 font-bold text-2xl px-16 py-7 mb-8">
-              BOOK MY 50% OFF DRIP NOW →
+            <CallbackButton className="bg-white text-orange-500 hover:bg-gray-100 font-bold text-xl md:text-2xl px-8 md:px-16 py-6 md:py-7 mb-8">
+              BOOK MY 50% OFF DRIP →
             </CallbackButton>
 
             {/* Trust Badges */}
