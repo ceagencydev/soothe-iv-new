@@ -1,9 +1,8 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -11,28 +10,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 
-// Form validation schema
-const contactFormSchema = z.object({
-  firstName: z.string().min(1, "First name is required").min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(1, "Last name is required").min(2, "Last name must be at least 2 characters"),
-  email: z.string().min(1, "Email is required").email("Please enter a valid email address"),
-  phone: z
-    .string()
-    .min(1, "Phone number is required")
-    .min(10, "Phone number must be at least 10 digits")
-    .regex(/^[\d\s\-+$$$$.]+$/, "Please enter a valid phone number"),
-})
-
-type ContactFormData = z.infer<typeof contactFormSchema>
-
 interface ModernContactFormProps {
   title?: string
   description?: string
   className?: string
 }
-
-// Make.com webhook URL
-const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/quyob9vflq22o6vvq6bfqnvcq6ykmhxh"
 
 export default function ModernContactForm({
   title = "Get In Touch",
@@ -42,47 +24,85 @@ export default function ModernContactForm({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState("")
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-    mode: "onBlur",
-  })
+  // Client-side validation
+  const validateForm = (formData: FormData) => {
+    const errors: Record<string, string> = {}
 
-  const onSubmit = async (data: ContactFormData) => {
+    const firstName = formData.get("firstName") as string
+    const lastName = formData.get("lastName") as string
+    const email = formData.get("email") as string
+    const phone = formData.get("phone") as string
+
+    if (!firstName || firstName.trim().length < 2) {
+      errors.firstName = "First name must be at least 2 characters"
+    }
+
+    if (!lastName || lastName.trim().length < 2) {
+      errors.lastName = "Last name must be at least 2 characters"
+    }
+
+    if (!email) {
+      errors.email = "Email is required"
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address"
+    }
+
+    if (!phone) {
+      errors.phone = "Phone number is required"
+    } else if (!/^[\d\s\-+().]{10,}$/.test(phone)) {
+      errors.phone = "Please enter a valid phone number"
+    }
+
+    return errors
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus("idle")
     setErrorMessage("")
+    setFormErrors({})
+
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+
+    // Validate form
+    const errors = validateForm(formData)
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors)
+      setIsSubmitting(false)
+      return
+    }
 
     try {
-      // Add source information to help with tracking
-      const formData = {
-        ...data,
+      // Prepare form data for submission
+      const submitData = {
+        firstName: formData.get("firstName") as string,
+        lastName: formData.get("lastName") as string,
+        email: formData.get("email") as string,
+        phone: formData.get("phone") as string,
         source: "Website Contact Form",
         submittedAt: new Date().toISOString(),
       }
 
-      // Send data directly to Make.com webhook
-      const response = await fetch(MAKE_WEBHOOK_URL, {
+      // Submit to Make.com webhook
+      const response = await fetch("https://hook.us2.make.com/quyob9vflq22o6vvq6bfqnvcq6ykmhxh", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submitData),
       })
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new Error(errorData.message || `Server error: ${response.status}`)
+        throw new Error(`Server error: ${response.status}`)
       }
 
-      // Success
+      // Success - show thank you message and clear form
       setSubmitStatus("success")
-      reset()
+      form.reset()
     } catch (error) {
       console.error("Form submission error:", error)
       setSubmitStatus("error")
@@ -95,7 +115,7 @@ export default function ModernContactForm({
   const resetForm = () => {
     setSubmitStatus("idle")
     setErrorMessage("")
-    reset()
+    setFormErrors({})
   }
 
   return (
@@ -130,7 +150,7 @@ export default function ModernContactForm({
 
           {/* Form */}
           {submitStatus !== "success" && (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5">
               {/* First Name & Last Name Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -139,17 +159,18 @@ export default function ModernContactForm({
                   </Label>
                   <Input
                     id="firstName"
+                    name="firstName"
                     type="text"
                     placeholder="John"
-                    {...register("firstName")}
                     className={`transition-colors ${
-                      errors.firstName
+                      formErrors.firstName
                         ? "border-red-300 focus:border-red-500 focus:ring-red-500"
                         : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     }`}
                     disabled={isSubmitting}
+                    required
                   />
-                  {errors.firstName && <p className="text-sm text-red-600">{errors.firstName.message}</p>}
+                  {formErrors.firstName && <p className="text-sm text-red-600">{formErrors.firstName}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -158,17 +179,18 @@ export default function ModernContactForm({
                   </Label>
                   <Input
                     id="lastName"
+                    name="lastName"
                     type="text"
                     placeholder="Doe"
-                    {...register("lastName")}
                     className={`transition-colors ${
-                      errors.lastName
+                      formErrors.lastName
                         ? "border-red-300 focus:border-red-500 focus:ring-red-500"
                         : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     }`}
                     disabled={isSubmitting}
+                    required
                   />
-                  {errors.lastName && <p className="text-sm text-red-600">{errors.lastName.message}</p>}
+                  {formErrors.lastName && <p className="text-sm text-red-600">{formErrors.lastName}</p>}
                 </div>
               </div>
 
@@ -179,17 +201,18 @@ export default function ModernContactForm({
                 </Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="john.doe@example.com"
-                  {...register("email")}
                   className={`transition-colors ${
-                    errors.email
+                    formErrors.email
                       ? "border-red-300 focus:border-red-500 focus:ring-red-500"
                       : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   }`}
                   disabled={isSubmitting}
+                  required
                 />
-                {errors.email && <p className="text-sm text-red-600">{errors.email.message}</p>}
+                {formErrors.email && <p className="text-sm text-red-600">{formErrors.email}</p>}
               </div>
 
               {/* Phone */}
@@ -199,17 +222,18 @@ export default function ModernContactForm({
                 </Label>
                 <Input
                   id="phone"
+                  name="phone"
                   type="tel"
                   placeholder="(555) 123-4567"
-                  {...register("phone")}
                   className={`transition-colors ${
-                    errors.phone
+                    formErrors.phone
                       ? "border-red-300 focus:border-red-500 focus:ring-red-500"
                       : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   }`}
                   disabled={isSubmitting}
+                  required
                 />
-                {errors.phone && <p className="text-sm text-red-600">{errors.phone.message}</p>}
+                {formErrors.phone && <p className="text-sm text-red-600">{formErrors.phone}</p>}
               </div>
 
               {/* Submit Button */}
