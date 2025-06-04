@@ -234,7 +234,7 @@ export function CallbackForm({ isOpen, onClose }: CallbackFormProps) {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full mt-8 bg-blue-500 hover:bg-blue-600" onClick={handleSubmit}>
+              <Button type="submit" className="w-full mt-8 bg-blue-500 hover:bg-blue-600">
                 Request Callback
               </Button>
 

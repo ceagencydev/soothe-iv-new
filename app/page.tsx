@@ -8,7 +8,7 @@ export default function IVTherapyLanding() {
     <div className="min-h-screen bg-white">
       {/* Sticky CTA for Mobile */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-orange-500 p-4 md:hidden">
-        <CallbackButton className="w-full bg-white text-orange-500 hover:bg-gray-100 font-bold text-lg">
+        <CallbackButton className="w-full bg-white text-orange-500 hover:bg-gray-100 font-bold text-xl py-6">
           50% Off – Book Now
         </CallbackButton>
       </div>
@@ -16,49 +16,92 @@ export default function IVTherapyLanding() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-orange-50 py-12 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 bg-red-500 text-white px-4 py-2 text-sm font-semibold">
-              LIMITED TIME: 50% OFF FIRST VISIT
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Why Smart Orange County Residents Are Choosing <span className="text-orange-500">Mobile IV Therapy</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
-              You're tired. You're hungover. You're sick. You're burned out.
-              <br />
-              <strong>IV therapy that comes to YOU, anywhere in Orange County.</strong>
-            </p>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Content */}
+              <div className="text-center lg:text-left">
+                <Badge className="mb-4 bg-red-500 text-white px-4 py-2 text-sm font-semibold">
+                  LIMITED TIME: 50% OFF FIRST VISIT
+                </Badge>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                  Why Smart Orange County Residents Are Choosing{" "}
+                  <span className="text-orange-500">Mobile IV Therapy</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
+                  You're tired. You're hungover. You're sick. You're burned out.
+                  <br />
+                  <strong>IV therapy that comes to YOU, anywhere in Orange County.</strong>
+                </p>
 
-            {/* Social Proof */}
-            <div className="flex flex-wrap justify-center items-center gap-6 mb-8 text-sm">
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-orange-500" />
-                <span className="font-semibold">1,000+ Trusted Clients</span>
+                {/* Social Proof */}
+                <div className="flex flex-wrap justify-center lg:justify-start items-center gap-6 mb-8 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Users className="h-5 w-5 text-orange-500" />
+                    <span className="font-semibold">1,000+ Trusted Clients</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="h-5 w-5 text-yellow-500" />
+                    <span className="font-semibold">1000+ 5-Star Reviews</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-5 w-5 text-green-500" />
+                    <span className="font-semibold">Doctor Approved</span>
+                  </div>
+                </div>
+
+                <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto lg:mx-0 mb-8">
+                  <p className="text-2xl font-bold text-gray-900 mb-2">
+                    <span className="line-through text-gray-400">$300</span>{" "}
+                    <span className="text-orange-500">$150</span>
+                  </p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Same medical-grade care you'd get in a hospital — for half the price, in your living room.
+                  </p>
+                  <CallbackButton className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl py-6 px-8">
+                    CLAIM YOUR 50% OFF DRIP →
+                  </CallbackButton>
+                  <p className="text-xs text-gray-500 mt-2">100% Satisfaction Guarantee — or your money back</p>
+                </div>
+
+                <p className="text-sm text-red-600 font-semibold">⚠️ Only 4 spots left this week — Offer ends soon</p>
               </div>
-              <div className="flex items-center gap-2">
-                <Star className="h-5 w-5 text-yellow-500" />
-                <span className="font-semibold">1000+ 5-Star Reviews</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-green-500" />
-                <span className="font-semibold">Doctor Approved</span>
+
+              {/* Right Image */}
+              <div className="relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <img
+                    src="/images/hero-iv-therapy.png"
+                    alt="Professional nurse administering IV therapy to a relaxed client"
+                    className="w-full h-auto object-cover"
+                  />
+
+                  {/* Testimonial Overlay */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-sm rounded-lg p-4 text-white">
+                    <p className="text-sm md:text-base font-medium mb-3 leading-relaxed">
+                      "After a wedding weekend, I was completely depleted. Soothe IV came to my hotel room and I was
+                      back to normal within hours!"
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        M
+                      </div>
+                      <div>
+                        <p className="font-semibold text-sm">Michelle T.</p>
+                        <p className="text-xs text-gray-300">Newport Beach</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Elements */}
+                <div className="absolute -top-4 -right-4 bg-green-500 text-white px-3 py-2 rounded-full text-sm font-bold shadow-lg">
+                  Licensed RN
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-blue-500 text-white px-3 py-2 rounded-full text-sm font-bold shadow-lg">
+                  45 Min Session
+                </div>
               </div>
             </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto mb-8">
-              <p className="text-2xl font-bold text-gray-900 mb-2">
-                <span className="line-through text-gray-400">$300</span> <span className="text-orange-500">$150</span>
-              </p>
-              <p className="text-sm text-gray-600 mb-4">
-                Same medical-grade care you'd get in a hospital — for half the price, in your living room.
-              </p>
-              <CallbackButton className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-3">
-                CLAIM YOUR 50% OFF DRIP →
-              </CallbackButton>
-              <p className="text-xs text-gray-500 mt-2">100% Satisfaction Guarantee — or your money back</p>
-            </div>
-
-            <p className="text-sm text-red-600 font-semibold">⚠️ Only 4 spots left this week — Offer ends soon</p>
           </div>
         </div>
       </section>
@@ -126,7 +169,7 @@ export default function IVTherapyLanding() {
               </div>
             </div>
             <div className="text-center mt-8">
-              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg px-8 py-3">
+              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-10 py-6">
                 SCHEDULE YOUR 50% OFF DRIP →
               </CallbackButton>
             </div>
@@ -163,7 +206,7 @@ export default function IVTherapyLanding() {
               This isn't a spa service — this is medical therapy, delivered professionally and discreetly.
             </p>
             <div className="text-center mt-8">
-              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg px-8 py-3">
+              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-10 py-6">
                 CLAIM YOUR 50% OFF DRIP →
               </CallbackButton>
             </div>
@@ -172,132 +215,48 @@ export default function IVTherapyLanding() {
       </section>
 
       {/* Feel the Shift */}
-      <section className="py-20 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-orange-50"></div>
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Feel the Shift in{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                  Minutes
-                </span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Imagine this: you're sitting in your favorite chair. Maybe it's at home, maybe at the office.
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Feel the Shift in Minutes</h2>
+
+            <div className="text-left max-w-3xl mx-auto mb-8 space-y-4">
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Imagine this: you're sitting in your favorite chair. Maybe it's at home, maybe at the office. A
+                registered nurse just inserted an IV line — painless, quick — and in less than 5 minutes, you feel it.
+              </p>
+
+              <div className="text-center my-6">
+                <p className="text-2xl font-bold text-orange-500 mb-2">Clarity.</p>
+                <p className="text-2xl font-bold text-blue-500 mb-2">Calm.</p>
+              </div>
+
+              <p className="text-lg text-gray-700 leading-relaxed">
+                A wave of hydration, energy, and recovery that sweeps through your body.
+              </p>
+
+              <p className="text-lg text-gray-700 leading-relaxed">
+                You're not in a clinic. You're not surrounded by coughing strangers. And you're not checking your watch
+                in a waiting room.
+              </p>
+
+              <p className="text-lg text-gray-700 leading-relaxed font-semibold">
+                You're exactly where you want to be. And you're getting exactly what your body needs.
+              </p>
+
+              <p className="text-xl text-gray-800 font-bold mt-6">
+                Welcome to Soothe IV — Orange County's mobile IV therapy service. For a limited time, first-time clients
+                receive 50% off.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8 mb-16">
-              {/* Step 1 */}
-              <div className="text-center">
-                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 h-full">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-white font-bold text-xl">1</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Quick & Painless Setup</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    A registered nurse inserts an IV line — painless, quick, professional. Most clients barely feel a
-                    thing.
-                  </p>
-                </div>
-              </div>
+            <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-10 py-6 mb-4">
+              CLAIM YOUR 50% OFF DRIP →
+            </CallbackButton>
 
-              {/* Step 2 */}
-              <div className="text-center">
-                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 h-full">
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-white font-bold text-xl">5</span>
-                    <span className="text-white text-sm ml-1">min</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">The Shift Begins</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    In less than 5 minutes, you feel it starting. A wave of hydration, energy, and recovery flowing
-                    through your body.
-                  </p>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="text-center">
-                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 h-full">
-                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-white font-bold text-xl">✓</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Complete Transformation</h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Within 45 minutes, you're back to feeling like yourself again — energized, hydrated, and ready.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Experience Description */}
-            <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-white text-center">
-              <div className="max-w-4xl mx-auto">
-                <h3 className="text-2xl md:text-3xl font-bold mb-8">What You'll Experience</h3>
-
-                <div className="grid md:grid-cols-3 gap-8 mb-8">
-                  <div className="text-center">
-                    <div className="text-4xl mb-4">🧠</div>
-                    <h4 className="text-xl font-bold mb-2 text-blue-300">Clarity</h4>
-                    <p className="text-gray-300">Mental fog lifts, focus returns</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl mb-4">😌</div>
-                    <h4 className="text-xl font-bold mb-2 text-purple-300">Calm</h4>
-                    <p className="text-gray-300">Stress melts away, peace returns</p>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl mb-4">⚡</div>
-                    <h4 className="text-xl font-bold mb-2 text-orange-300">Energy</h4>
-                    <p className="text-gray-300">Vitality restored, strength renewed</p>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-700 pt-8">
-                  <p className="text-lg md:text-xl leading-relaxed mb-6 text-gray-200">
-                    You're not in a clinic. You're not surrounded by coughing strangers. You're not checking your watch
-                    in a waiting room.
-                  </p>
-                  <p className="text-xl md:text-2xl font-semibold mb-8">
-                    You're exactly where you want to be. Getting exactly what your body needs.
-                  </p>
-
-                  <CallbackButton className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200">
-                    EXPERIENCE THE SHIFT - 50% OFF →
-                  </CallbackButton>
-                  <p className="text-sm mt-4 text-gray-400">
-                    100% Satisfaction Guarantee — feel the difference or your money back
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Welcome Message */}
-            <div className="text-center mt-16">
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-3xl mx-auto">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Welcome to Soothe IV</h3>
-                <p className="text-lg text-gray-700 mb-6">
-                  Orange County's premier mobile IV therapy service. For a limited time, first-time clients receive 50%
-                  off.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span>Same-day appointments</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span>Licensed nurses</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span>Medical-grade ingredients</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <p className="text-sm text-gray-600 font-medium">
+              100% Satisfaction Guarantee — feel the difference or your money back
+            </p>
           </div>
         </div>
       </section>
@@ -315,10 +274,13 @@ export default function IVTherapyLanding() {
             </p>
 
             <div className="text-center mb-8">
-              <div className="inline-block bg-pink-100 px-6 py-3 rounded-lg">
+              <div className="inline-block bg-orange-100 px-6 py-3 rounded-lg relative">
+                <div className="absolute -top-3 -right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                  50% OFF
+                </div>
                 <p className="text-3xl font-bold">
-                  <span className="line-through text-gray-400">$300</span> <span className="text-pink-500">$150</span>{" "}
-                  <span className="text-lg font-normal text-pink-400">ALL IVS FOR A LIMITED TIME</span>
+                  <span className="line-through text-gray-400">$300</span> <span className="text-orange-500">$150</span>{" "}
+                  <span className="text-lg font-normal text-orange-400">ALL IVS FOR A LIMITED TIME</span>
                 </p>
               </div>
             </div>
@@ -443,9 +405,9 @@ export default function IVTherapyLanding() {
             <div className="bg-blue-200 rounded-2xl p-8 text-center">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Not sure which one's right?</h3>
               <p className="text-xl text-gray-700 mb-6">Give us a call or text and we'll help you decide!</p>
-              <CallbackButton className="bg-blue-500 hover:bg-blue-600 text-white font-bold text-lg px-8 py-3 rounded-full mb-4">
+              <CallbackButton className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-10 py-6 rounded-full mb-4">
                 <span className="mr-2">CLAIM YOUR 50%</span>
-                <span className="bg-white text-blue-500 rounded-full px-2 py-1 text-sm">💰</span>
+                <span className="bg-white text-orange-500 rounded-full px-2 py-1 text-sm">💰</span>
               </CallbackButton>
               <div className="text-sm">
                 <p className="font-semibold text-blue-700">Save 50% off today</p>
@@ -578,7 +540,7 @@ export default function IVTherapyLanding() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 bg-orange-500 text-white">
+      <section className="py-16 bg-black text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Only a Few Openings Left This Week</h2>
@@ -589,7 +551,7 @@ export default function IVTherapyLanding() {
             <p className="text-lg mb-8 font-semibold">
               Only a few spots remain this week. Book now to secure your 50% off session.
             </p>
-            <CallbackButton className="bg-white text-orange-500 hover:bg-gray-100 font-bold text-xl px-12 py-4 mb-8">
+            <CallbackButton className="bg-white text-orange-500 hover:bg-gray-100 font-bold text-2xl px-16 py-7 mb-8">
               BOOK MY 50% OFF DRIP NOW →
             </CallbackButton>
 
@@ -619,16 +581,6 @@ export default function IVTherapyLanding() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <p className="text-lg font-bold mb-2">Soothe IV - Orange County Mobile IV Therapy</p>
-            <p className="text-gray-400">Professional IV therapy delivered to your location</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
