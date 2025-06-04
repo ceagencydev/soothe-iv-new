@@ -29,14 +29,42 @@ export function CallbackForm({ isOpen, onClose }: CallbackFormProps) {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the data to your backend
-    console.log("Form submitted:", formData)
 
-    // Show success message or redirect
-    alert("Thank you! We'll contact you shortly to schedule your appointment.")
-    onClose()
+    try {
+      // Prepare form data for submission
+      const submitData = {
+        ivExperience: formData.ivExperience,
+        wellnessGoal: formData.wellnessGoal,
+        schedulePreference: formData.schedulePreference,
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        source: "IV Therapy Callback Form",
+        submittedAt: new Date().toISOString(),
+      }
+
+      // Submit to Make.com webhook
+      const response = await fetch("https://hook.us2.make.com/quyob9vflq22o6vvq6bfqnvcq6ykmhxh", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submitData),
+      })
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`)
+      }
+
+      // Show success message or redirect
+      alert("Thank you! We'll contact you shortly to schedule your appointment.")
+      onClose()
+    } catch (error) {
+      console.error("Form submission error:", error)
+      alert("Something went wrong. Please try again.")
+    }
   }
 
   if (!isOpen) return null
@@ -206,7 +234,7 @@ export function CallbackForm({ isOpen, onClose }: CallbackFormProps) {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full mt-8 bg-blue-500 hover:bg-blue-600">
+              <Button type="submit" className="w-full mt-8 bg-blue-500 hover:bg-blue-600" onClick={handleSubmit}>
                 Request Callback
               </Button>
 
